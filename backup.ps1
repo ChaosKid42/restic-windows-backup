@@ -334,7 +334,7 @@ function Send-Email {
         # create a temporary error log to log errors; can't write to the same file that Send-MailMessage is reading
         $temp_error_log = $ErrorLog + "_temp"
 
-        Send-MailMessage @ResticEmailConfig -From $ResticEmailFrom -To $ResticEmailTo -Credential $credentials -Subject $subject -Body $body @attachments 3>&1 2>> $temp_error_log
+        Send-MailMessage @ResticEmailConfig -From $ResticEmailFrom -To $ResticEmailTo1, $ResticEmailTo2 -Credential $credentials -Subject $subject -Body $body @attachments 3>&1 2>> $temp_error_log
 
         if(-not $?) {
             "[[Email]] Sending email completed with errors" | Tee-Object -Append $temp_error_log | Out-File -Append $SuccessLog
